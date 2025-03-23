@@ -15,3 +15,15 @@ app = Flask(__name__)
 # Initialize components
 chatbot = StudyBotAI()
 reminder_manager = ReminderManager()
+
+
+@app.route('/')
+def index():
+    """Render the main chat interface"""
+    return render_template('index.html')
+
+@app.route('/dashboard')
+def dashboard():
+    """Render the reminders dashboard"""
+    reminders = reminder_manager.get_upcoming_reminders()
+    return render_template('dashboard.html', reminders=reminders)
