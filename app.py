@@ -61,3 +61,10 @@ def chat():
                 response += f"\n\n❌ {reminder_msg}"
     
     return jsonify({'response': response})
+
+@app.route('/reminders', methods=['GET'])
+def get_reminders():
+    """API endpoint to get upcoming reminders"""
+    reminders = reminder_manager.get_upcoming_reminders()
+    return jsonify({'reminders': reminders})
+
