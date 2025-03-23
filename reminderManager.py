@@ -24,7 +24,8 @@ class ReminderManager:
         self.scheduler_thread.daemon = True
         self.scheduler_thread.start()
 
-        def load_reminders(self):
+
+    def load_reminders(self):
         """Load reminders from storage"""
         try:
             if os.path.exists('reminders.json'):
@@ -49,6 +50,3 @@ class ReminderManager:
         reminder_datetime = self._parse_time(reminder_time)
         if not reminder_datetime:
             return False, "I couldn't understand that time format. Please try again."
-        
-        
-        
