@@ -87,6 +87,7 @@ class ReminderManager:
         # Return the next 'limit' reminders
         return upcoming[:limit]
     
+
     def mark_completed(self, reminder_id):
         """Mark a reminder as completed"""
         for reminder in self.reminders:
@@ -96,6 +97,7 @@ class ReminderManager:
                 return True
         return False
     
+
     def send_reminder(self, reminder):
         """Send a notification for a reminder"""
         message = f"Reminder: Time to {reminder['task']} for {reminder['subject']}"
@@ -109,6 +111,7 @@ class ReminderManager:
         
         # In a real application, you might send this via email, SMS, or push notification
     
+
     def _parse_time(self, time_string):
         """Parse a time string into a datetime object"""
         now = datetime.now()
@@ -139,6 +142,7 @@ class ReminderManager:
             print(f"Error parsing time: {e}")
             return None
     
+
     def _schedule_reminder(self, reminder):
         """Schedule a reminder to be sent at the specified time"""
         reminder_datetime = datetime.strptime(reminder["datetime"], "%Y-%m-%d %H:%M:%S")
@@ -152,6 +156,7 @@ class ReminderManager:
             schedule.every(seconds_until_reminder).seconds.do(
                 self.send_reminder, reminder
             ).tag(reminder["id"])
+    
     
     def run_scheduler(self):
         """Run the scheduler in a loop"""
