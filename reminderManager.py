@@ -139,4 +139,22 @@ class ReminderManager:
             print(f"Error parsing time: {e}")
             return None
     
+    def _schedule_reminder(self, reminder):
+        """Schedule a reminder to be sent at the specified time"""
+        reminder_datetime = datetime.strptime(reminder["datetime"], "%Y-%m-%d %H:%M:%S")
         
+        # Calculate seconds until the reminder
+        now = datetime.now()
+        seconds_until_reminder = (reminder_datetime - now).total_seconds()
+        
+        if seconds_until_reminder > 0:
+            # Schedule the job using the schedule library
+            schedule.every(seconds_until_reminder).seconds.do(
+                self.send_reminder, reminder
+            ).tag(reminder["id"])
+    
+    def run_scheduler(self):
+        """Run the scheduler in a loop"""
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
