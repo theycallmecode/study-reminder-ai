@@ -77,4 +77,66 @@ class ReminderManager:
         
         return True, f"Reminder set for {task} ({subject}) at {reminder_datetime.strftime('%A, %B %d at %I:%M %p')}"
     
+
+    def get_upcoming_reminders(self, limit=5):
+        """Get the next few upcoming reminders"""
+        # Filter incomplete reminders and sort by date
+        upcoming = [r for r in self.reminders if not r.get("completed", False)]
+        upcoming.sort(key=lambda x: datetime.strptime(x["datetime"], "%Y-%m-%d %H:%M:%S"))
+        
+        # Return the next 'limit' reminders
+        return upcoming[:limit]
+    
+    def mark_completed(self, reminder_id):
+        """Mark a reminder as completed"""
+        for reminder in self.reminders:
+            if reminder["id"] == reminder_id:
+                reminder["completed"] = True
+                self.save_reminders()
+                return True
+        return False
+    
+    def send_reminder(self, reminder):
+        """Send a notification for a reminder"""
+        message = f"Reminder: Time to {reminder['task']} for {reminder['subject']}"
+        print("\n" + "="*50)
+        print(message)
+        print("="*50 + "\n")
+        
+        # Use text-to-speech for desktop notification
+        self.tts_engine.say(message)
+        self.tts_engine.runAndWait()
+        
+        # In a real application, you might send this via email, SMS, or push notification
+    
+    def _parse_time(self, time_string):
+        """Parse a time string into a datetime object"""
+        now = datetime.now()
+        
+        # Handle common time formats - in a real app, you'd use a more robust parser
+        try:
+            # Simple formats like "tomorrow at 3pm"
+            if "tomorrow" in time_string.lower():
+                tomorrow = now + timedelta(days=1)
+                if "pm" in time_string.lower():
+                    hour = int(time_string.lower().split("at ")[1].split("pm")[0].strip())
+                    return datetime(tomorrow.year, tomorrow.month, tomorrow.day, hour+12 if hour < 12 else hour)
+                elif "am" in time_string.lower():
+                    hour = int(time_string.lower().split("at ")[1].split("am")[0].strip())
+                    return datetime(tomorrow.year, tomorrow.month, tomorrow.day, hour if hour < 12 else 0)
+            
+            # Simple format like "3pm today"
+            if "today" in time_string.lower() and "pm" in time_string.lower():
+                hour = int(time_string.lower().split("today")[0].strip().rstrip("pm"))
+                return datetime(now.year, now.month, now.day, hour+12 if hour < 12 else hour)
+            
+            # Add more parsing logic here for different time formats
+            
+            # Default fallback - try to parse as exact datetime
+            return datetime.strptime(time_string, "%Y-%m-%d %H:%M:%S")
+            
+        except Exception as e:
+            print(f"Error parsing time: {e}")
+            return None
+    
         
