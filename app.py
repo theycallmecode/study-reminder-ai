@@ -68,3 +68,14 @@ def get_reminders():
     reminders = reminder_manager.get_upcoming_reminders()
     return jsonify({'reminders': reminders})
 
+@app.route('/complete-reminder/<reminder_id>', methods=['POST'])
+def complete_reminder(reminder_id):
+    """Mark a reminder as completed"""
+    success = reminder_manager.mark_completed(reminder_id)
+    if success:
+        return jsonify({'status': 'success'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Reminder not found'})
+
+if __name__ == '__main__':
+    app.run(debug=True)
