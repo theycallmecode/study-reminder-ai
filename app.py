@@ -22,6 +22,7 @@ def index():
     """Render the main chat interface"""
     return render_template('index.html')
 
+
 @app.route('/dashboard')
 def dashboard():
     """Render the reminders dashboard"""
@@ -41,6 +42,7 @@ def chat():
     response = chatbot.get_response(user_message)
     
     # Check if the message contains study reminder intent
+
     if any(keyword in user_message.lower() for keyword in ['remind', 'schedule', 'study', 'assignment', 'due']):
         # Extract study info
         study_info = chatbot.extract_study_info(user_message)
@@ -62,11 +64,13 @@ def chat():
     
     return jsonify({'response': response})
 
+
 @app.route('/reminders', methods=['GET'])
 def get_reminders():
     """API endpoint to get upcoming reminders"""
     reminders = reminder_manager.get_upcoming_reminders()
     return jsonify({'reminders': reminders})
+
 
 @app.route('/complete-reminder/<reminder_id>', methods=['POST'])
 def complete_reminder(reminder_id):
@@ -76,6 +80,7 @@ def complete_reminder(reminder_id):
         return jsonify({'status': 'success'})
     else:
         return jsonify({'status': 'error', 'message': 'Reminder not found'})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
