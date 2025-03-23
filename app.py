@@ -27,3 +27,37 @@ def dashboard():
     """Render the reminders dashboard"""
     reminders = reminder_manager.get_upcoming_reminders()
     return render_template('dashboard.html', reminders=reminders)
+
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    """Process user messages and return bot responses"""
+    user_message = request.json.get('message', '')
+    
+    if not user_message:
+        return jsonify({'response': 'Please enter a message'})
+    
+    # Get response from AI model
+    response = chatbot.get_response(user_message)
+    
+    # Check if the message contains study reminder intent
+    if any(keyword in user_message.lower() for keyword in ['remind', 'schedule', 'study', 'assignment', 'due']):
+        # Extract study info
+        study_info = chatbot.extract_study_info(user_message)
+        
+        if study_info.get('task') and study_info.get('datetime'):
+            # Add the reminder
+            success, reminder_msg = reminder_manager.add_reminder(
+                task=study_info.get('task'),
+                subject=study_info.get('subject', 'General Study'),
+                reminder_time=study_info.get('datetime'),
+                duration=study_info.get('duration'),
+                priority=study_info.get('priority', 'medium')
+            )
+            
+            if success:
+                response += f"\n\n✅ {reminder_msg}"
+            else:
+                response += f"\n\n❌ {reminder_msg}"
+    
+    return jsonify({'response': response})
