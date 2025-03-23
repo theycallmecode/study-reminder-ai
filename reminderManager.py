@@ -49,4 +49,32 @@ class ReminderManager:
         # Parse the reminder time
         reminder_datetime = self._parse_time(reminder_time)
         if not reminder_datetime:
-            return False, "I couldn't understand that time format. Please try again."
+            return False, "I couldn't understand the time format. Please try again."
+        
+        # Generate a unique ID for the reminder
+        reminder_id = str(len(self.reminders) + 1)
+        
+        # Create the reminder object
+        reminder = {
+            "id": reminder_id,
+            "task": task,
+            "subject": subject,
+            "datetime": reminder_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            "duration": duration,
+            "priority": priority,
+            "completed": False,
+            "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+        
+        # Add to our list
+        self.reminders.append(reminder)
+        
+        # Save to storage
+        self.save_reminders()
+        
+        # Schedule the reminder
+        self._schedule_reminder(reminder)
+        
+        return True, f"Reminder set for {task} ({subject}) at {reminder_datetime.strftime('%A, %B %d at %I:%M %p')}"
+    
+        
