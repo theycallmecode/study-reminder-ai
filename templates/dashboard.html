@@ -2,16 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Study Reminder AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Your Study Reminders</h1>
-    <ul>
-        {% for reminder in reminders %}
-            <li>{{ reminder.task }} - Scheduled at {{ reminder.time }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/">Back to Chat</a>
+    <header>
+        <h1>Your Study Dashboard</h1>
+        <p>Stay on track with your reminders</p>
+    </header>
+    <main class="container">
+        <section class="reminder-container">
+            {% if reminders %}
+                <table class="reminder-table">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Scheduled Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reminder in reminders %}
+                            <tr>
+                                <td>{{ reminder.task }}</td>
+                                <td>{{ reminder.time }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-reminders">No reminders yet! Set some in the chat.</p>
+            {% endif %}
+        </section>
+        <a href="/" class="dashboard-link">Back to Chat</a>
+    </main>
+    <footer>
+        <p>Made with ❤️ for students</p>
+    </footer>
 </body>
 </html>
