@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Your Study Reminders</h1>
+    <ul>
+        {% for reminder in reminders %}
+            <li>{{ reminder.task }} - Scheduled at {{ reminder.time }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Chat</a>
+</body>
+</html>

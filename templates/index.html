@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Reminder AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Study Reminder AI</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+    <a href="/dashboard">View Dashboard</a>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
