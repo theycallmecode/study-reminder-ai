@@ -36,18 +36,22 @@ def dashboard():
     reminders = reminder_manager.get_reminders()
     return render_template('dashboard.html', reminders=reminders, username=username)
 
+@app.route('/stopwatch')
+def stopwatch():
+    username = session.get('username', None)
+    return render_template('stopwatch.html', username=username)
+
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get('message')
     username = session.get('username', None)
     response = chat_model.get_response(user_message, username)
     
-    # Check if user wants to set a reminder via chat
     if "remind me" in user_message.lower():
         parts = user_message.lower().split("to")
         if len(parts) > 1:
             task = parts[1].strip()
-            reminder_manager.add_reminder(task)  # Default to 5 mins if no time specified
+            reminder_manager.add_reminder(task)
             return jsonify({"response": f"Reminder set for: {task} (in 5 minutes)"})
     
     return jsonify({"response": response})
@@ -55,7 +59,7 @@ def chat():
 @app.route('/set_reminder', methods=['POST'])
 def set_reminder():
     task = request.json.get('task')
-    time_str = request.json.get('time')  # Format: "HH:MM"
+    time_str = request.json.get('time')
     reminder_manager.add_reminder_with_time(task, time_str)
     return jsonify({"response": f"Reminder set for '{task}' at {time_str}"})
 

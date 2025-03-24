@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Timer - Omni Learn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="backdrop"></div>
+    <header>
+        <h1>Focus Timer</h1>
+        <p>Boost Your Study Session</p>
+    </header>
+    <main class="container">
+        <section class="stopwatch-container">
+            <div id="timer-display" class="timer-display">00:00:00</div>
+            <div class="timer-controls">
+                <button id="start-btn" onclick="startTimer()">Start</button>
+                <button id="stop-btn" onclick="stopTimer()">Stop</button>
+                <button id="reset-btn" onclick="resetTimer()">Reset</button>
+            </div>
+        </section>
+        <div class="link-wrapper">
+            <a href="/" class="dashboard-link">Back to Chat</a>
+        </div>
+    </main>
+    <footer>
+        <p>System Online | March 24, 2025</p>
+    </footer>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

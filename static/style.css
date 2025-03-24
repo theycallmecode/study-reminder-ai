@@ -12,7 +12,7 @@ body {
     line-height: 1.6;
     position: relative;
     overflow-x: hidden;
-    min-height: 100vh; /* Ensure body takes full height */
+    min-height: 100vh;
 }
 
 /* Backdrop for Holographic Effect */
@@ -52,7 +52,7 @@ header p {
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
-    padding-bottom: 80px; /* Add padding to push content above footer */
+    padding-bottom: 80px;
 }
 
 /* Username Form */
@@ -131,7 +131,8 @@ header p {
 }
 
 .chat-box {
-    height: 500px;
+    width: 100%; /* Increase width to fill container */
+    height: 300px; /* Decrease height from 500px to 300px */
     overflow-y: auto;
     padding: 20px;
     border: 2px solid #444;
@@ -234,7 +235,7 @@ header p {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0. pach3s;
     box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
 }
 
@@ -244,10 +245,13 @@ header p {
     box-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
 }
 
-/* Dashboard Link Wrapper */
+/* Link Wrapper */
 .link-wrapper {
     text-align: center;
     margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 /* Dashboard Link */
@@ -266,6 +270,24 @@ header p {
     background: linear-gradient(135deg, #00cc66, #00ff99);
     transform: translateY(-3px);
     box-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+}
+
+/* Stopwatch Link */
+.stopwatch-link {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #ff6b6b, #ff4040);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+.stopwatch-link:hover {
+    background: linear-gradient(135deg, #ff4040, #ff6b6b);
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
 }
 
 /* Reminder Container */
@@ -309,6 +331,47 @@ header p {
     text-shadow: 0 0 5px rgba(0, 212, 255, 0.2);
 }
 
+/* Stopwatch Container */
+.stopwatch-container {
+    background: rgba(30, 42, 56, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    padding: 30px;
+    border: 1px solid #00d4ff;
+    text-align: center;
+}
+
+.timer-display {
+    font-size: 4em;
+    color: #00d4ff;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.timer-controls button {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #ff6b6b, #ff4040);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    font-size: 1.2em;
+}
+
+.timer-controls button:hover {
+    background: linear-gradient(135deg, #ff4040, #ff6b6b);
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -320,7 +383,7 @@ footer {
     width: 100%;
     border-top: 3px solid #00d4ff;
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-    z-index: 10; /* Ensure footer stays above backdrop */
+    z-index: 10;
 }
 
 /* Animations */
@@ -343,14 +406,14 @@ footer {
 @media (max-width: 600px) {
     .container {
         padding: 0 15px;
-        padding-bottom: 100px; /* Extra padding for smaller screens */
+        padding-bottom: 100px;
     }
 
-    .input-area, .reminder-form {
+    .input-area, .reminder-form, .timer-controls {
         flex-direction: column;
     }
 
-    .input-area input, .reminder-form input, .reminder-form button {
+    .input-area input, .reminder-form input, .reminder-form button, .timer-controls button {
         width: 100%;
     }
 
@@ -359,6 +422,15 @@ footer {
     }
 
     .chat-box {
-        height: 400px;
+        height: 200px; /* Further reduce height on small screens */
+    }
+
+    .link-wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .timer-display {
+        font-size: 2.5em;
     }
 }
