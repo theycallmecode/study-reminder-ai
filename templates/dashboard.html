@@ -9,7 +9,11 @@
 <body>
     <header>
         <h1>Your Study Dashboard</h1>
-        <p>Stay on track with your reminders</p>
+        {% if username %}
+            <p>Welcome back, {{ username }}!</p>
+        {% else %}
+            <p>Stay on track with your reminders</p>
+        {% endif %}
     </header>
     <main class="container">
         <section class="reminder-container">
@@ -31,7 +35,7 @@
                     </tbody>
                 </table>
             {% else %}
-                <p class="no-reminders">No reminders yet! Set some in the chat.</p>
+                <p class="no-reminders">No reminders yet! Set some in the chat or with the button.</p>
             {% endif %}
         </section>
         <a href="/" class="dashboard-link">Back to Chat</a>

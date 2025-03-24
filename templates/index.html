@@ -9,17 +9,35 @@
 <body>
     <header>
         <h1>Study Reminder AI</h1>
-        <p>Your personal study buddy!</p>
+        <p>Your personal study companion</p>
     </header>
     <main class="container">
-        <section class="chat-container">
-            <div id="chat-box" class="chat-box"></div>
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="Ask me anything or set a reminder..." autocomplete="off">
-                <button onclick="sendMessage()">Send</button>
-            </div>
-        </section>
-        <a href="/dashboard" class="dashboard-link">View Your Reminders</a>
+        {% if not username %}
+            <section class="username-form">
+                <form method="POST">
+                    <label for="username">What's your name?</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your name" required>
+                    <button type="submit">Save</button>
+                </form>
+            </section>
+        {% else %}
+            {% if greeting %}
+                <p class="greeting">{{ greeting }}</p>
+            {% endif %}
+            <section class="chat-container">
+                <div id="chat-box" class="chat-box"></div>
+                <div class="input-area">
+                    <input type="text" id="user-input" placeholder="Ask me anything or set a reminder..." autocomplete="off">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+                <div class="reminder-form">
+                    <input type="text" id="reminder-task" placeholder="Task (e.g., Study Math)" autocomplete="off">
+                    <input type="time" id="reminder-time">
+                    <button onclick="setReminder()">Set Reminder</button>
+                </div>
+            </section>
+            <a href="/dashboard" class="dashboard-link">View Your Reminders</a>
+        {% endif %}
     </main>
     <footer>
         <p>Made with ❤️ for students</p>
