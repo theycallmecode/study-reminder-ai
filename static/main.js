@@ -1,3 +1,4 @@
+// Chat and Reminder Functions
 function sendMessage() {
     const input = document.getElementById('user-input');
     const message = input.value;
@@ -61,4 +62,35 @@ function setReminder() {
 
     taskInput.value = '';
     timeInput.value = '';
-}``
+}
+
+// Stopwatch Functions
+let timerInterval = null;
+let timeElapsed = 0;
+
+function startTimer() {
+    if (timerInterval) return; // Prevent multiple intervals
+    timerInterval = setInterval(() => {
+        timeElapsed++;
+        updateTimerDisplay();
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+function resetTimer() {
+    stopTimer();
+    timeElapsed = 0;
+    updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+    const hours = Math.floor(timeElapsed / 3600);
+    const minutes = Math.floor((timeElapsed % 3600) / 60);
+    const seconds = timeElapsed % 60;
+    const display = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    document.getElementById('timer-display').textContent = display;
+}
