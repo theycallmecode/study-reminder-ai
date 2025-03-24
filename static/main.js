@@ -4,8 +4,12 @@ function sendMessage() {
     if (!message) return;
 
     const chatBox = document.getElementById('chat-box');
-    chatBox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
-    
+    const userMsg = document.createElement('p');
+    userMsg.innerHTML = `<strong>You:</strong> ${message}`;
+    userMsg.classList.add('fade-in');
+    chatBox.appendChild(userMsg);
+    chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+
     fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -13,8 +17,11 @@ function sendMessage() {
     })
     .then(response => response.json())
     .then(data => {
-        chatBox.innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
+        const aiMsg = document.createElement('p');
+        aiMsg.innerHTML = `<strong>AI:</strong> ${data.response}`;
+        aiMsg.classList.add('fade-in');
+        chatBox.appendChild(aiMsg);
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
     });
 
     input.value = '';
@@ -27,12 +34,16 @@ function setReminder() {
     const time = timeInput.value;
 
     if (!task || !time) {
-        alert('Please enter both a task and a time!');
+        alert('Designate both a task and a temporal coordinate!');
         return;
     }
 
     const chatBox = document.getElementById('chat-box');
-    chatBox.innerHTML += `<p><strong>You:</strong> Set reminder: ${task} at ${time}</p>`;
+    const userMsg = document.createElement('p');
+    userMsg.innerHTML = `<strong>You:</strong> Set reminder: ${task} at ${time}`;
+    userMsg.classList.add('fade-in');
+    chatBox.appendChild(userMsg);
+    chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
 
     fetch('/set_reminder', {
         method: 'POST',
@@ -41,8 +52,11 @@ function setReminder() {
     })
     .then(response => response.json())
     .then(data => {
-        chatBox.innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
+        const aiMsg = document.createElement('p');
+        aiMsg.innerHTML = `<strong>AI:</strong> ${data.response}`;
+        aiMsg.classList.add('fade-in');
+        chatBox.appendChild(aiMsg);
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
     });
 
     taskInput.value = '';

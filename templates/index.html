@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Reminder AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="backdrop"></div>
     <header>
         <h1>Study Reminder AI</h1>
-        <p>Your personal study companion</p>
+        <p>Neural Network v3.0 - xAI Inspired</p>
     </header>
     <main class="container">
         {% if not username %}
             <section class="username-form">
                 <form method="POST">
-                    <label for="username">What's your name?</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your name" required>
-                    <button type="submit">Save</button>
+                    <label for="username">Identify Yourself, Traveler</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your designation" required>
+                    <button type="submit">Initialize</button>
                 </form>
             </section>
         {% else %}
@@ -27,20 +29,22 @@
             <section class="chat-container">
                 <div id="chat-box" class="chat-box"></div>
                 <div class="input-area">
-                    <input type="text" id="user-input" placeholder="Ask me anything or set a reminder..." autocomplete="off">
-                    <button onclick="sendMessage()">Send</button>
+                    <input type="text" id="user-input" placeholder="Query the Matrix..." autocomplete="off">
+                    <button onclick="sendMessage()">Transmit</button>
                 </div>
                 <div class="reminder-form">
-                    <input type="text" id="reminder-task" placeholder="Task (e.g., Study Math)" autocomplete="off">
-                    <input type="time" id="reminder-time">
-                    <button onclick="setReminder()">Set Reminder</button>
+                    <input type="text" id="reminder-task" placeholder="Task Designation" autocomplete="off">
+                    <input type="time" id="reminder-time" class="time-picker">
+                    <button onclick="setReminder()">Set Quantum Reminder</button>
                 </div>
             </section>
-            <a href="/dashboard" class="dashboard-link">View Your Reminders</a>
+            <div class="link-wrapper">
+                <a href="/dashboard" class="dashboard-link">Access Temporal Nodes</a>
+            </div>
         {% endif %}
     </main>
     <footer>
-        <p>Made with ❤️ for students</p>
+        <p>System Online | March 24, 2025</p>
     </footer>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>

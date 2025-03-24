@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Study Reminder AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="backdrop"></div>
     <header>
-        <h1>Your Study Dashboard</h1>
+        <h1>Temporal Nexus</h1>
         {% if username %}
-            <p>Welcome back, {{ username }}!</p>
+            <p>Operative {{ username }}, System Active</p>
         {% else %}
-            <p>Stay on track with your reminders</p>
+            <p>Monitor Your Chronal Objectives</p>
         {% endif %}
     </header>
     <main class="container">
@@ -21,8 +23,8 @@
                 <table class="reminder-table">
                     <thead>
                         <tr>
-                            <th>Task</th>
-                            <th>Scheduled Time</th>
+                            <th>Objective</th>
+                            <th>Activation Point</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,13 +37,15 @@
                     </tbody>
                 </table>
             {% else %}
-                <p class="no-reminders">No reminders yet! Set some in the chat or with the button.</p>
+                <p class="no-reminders">No Quantum Nodes Active. Deploy via Core Interface.</p>
             {% endif %}
         </section>
-        <a href="/" class="dashboard-link">Back to Chat</a>
+        <div class="link-wrapper">
+            <a href="/" class="dashboard-link">Return to Neural Core</a>
+        </div>
     </main>
     <footer>
-        <p>Made with ❤️ for students</p>
+        <p>System Online | March 24, 2025</p>
     </footer>
 </body>
 </html>
