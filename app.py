@@ -4,9 +4,10 @@ import threading
 from reminder_manager import ReminderManager
 from chat_model import ChatModel
 from datetime import datetime
+import os
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here'  # Required for sessions
+app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')  # Use env var for security
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -64,4 +65,5 @@ def set_reminder():
     return jsonify({"response": f"Reminder set for '{task}' at {time_str}"})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.getenv('PORT', 5000))  # Default to 5000 locally, use env var in production
+    app.run(host='0.0.0.0', port=port, debug=False)  # Set debug=False for production
