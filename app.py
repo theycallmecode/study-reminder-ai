@@ -5,9 +5,14 @@ from reminder_manager import ReminderManager
 from chat_model import ChatModel
 from datetime import datetime
 import os
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')  # Use env var for security
+app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -65,5 +70,7 @@ def set_reminder():
     return jsonify({"response": f"Reminder set for '{task}' at {time_str}"})
 
 if __name__ == "__main__":
-    port = int(os.getenv('PORT', 5000))  # Default to 5000 locally, use env var in production
-    app.run(host='0.0.0.0', port=port, debug=False)  # Set debug=False for production
+    port = int(os.getenv('PORT', 10000))  # Use Render's default port 10000
+    host = '0.0.0.0'  # Bind to all interfaces
+    logger.info(f"Starting Flask app on {host}:{port}")
+    app.run(host=host, port=port, debug=False)
