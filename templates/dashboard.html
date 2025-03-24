@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Study Reminder AI</title>
+    <title>Dashboard - Omni Learn</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="backdrop"></div>
     <header>
-        <h1>Temporal Nexus</h1>
+        <h1>Your Reminders</h1>
         {% if username %}
-            <p>Operative {{ username }}, System Active</p>
+            <p>Welcome, {{ username }}!</p>
         {% else %}
-            <p>Monitor Your Chronal Objectives</p>
+            <p>Keep Track of Your Tasks</p>
         {% endif %}
     </header>
     <main class="container">
@@ -23,8 +23,8 @@
                 <table class="reminder-table">
                     <thead>
                         <tr>
-                            <th>Objective</th>
-                            <th>Activation Point</th>
+                            <th>Task</th>
+                            <th>Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,11 +37,11 @@
                     </tbody>
                 </table>
             {% else %}
-                <p class="no-reminders">No Quantum Nodes Active. Deploy via Core Interface.</p>
+                <p class="no-reminders">No reminders set yet. Add some in the chat!</p>
             {% endif %}
         </section>
         <div class="link-wrapper">
-            <a href="/" class="dashboard-link">Return to Neural Core</a>
+            <a href="/" class="dashboard-link">Back to Chat</a>
         </div>
     </main>
     <footer>

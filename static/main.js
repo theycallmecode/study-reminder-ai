@@ -34,7 +34,7 @@ function setReminder() {
     const time = timeInput.value;
 
     if (!task || !time) {
-        alert('Designate both a task and a temporal coordinate!');
+        alert('Please enter both a task and a time!');
         return;
     }
 
@@ -61,4 +61,4 @@ function setReminder() {
 
     taskInput.value = '';
     timeInput.value = '';
-}
+}``
