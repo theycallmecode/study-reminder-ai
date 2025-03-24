@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Reminder AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Study Reminder AI</h1>
+    <div id="chat-container">
+        <div id="chat-output"></div>
+        <input type="text" id="chat-input" placeholder="Ask me anything about studying...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <div id="reminder-form">
+        <h2>Set a Reminder</h2>
+        <input type="time" id="reminder-time">
+        <input type="text" id="reminder-task" placeholder="e.g., Study Math">
+        <button onclick="setReminder()">Set Reminder</button>
+    </div>
+    <a href="/dashboard">Go to Dashboard</a>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
